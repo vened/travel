@@ -47,6 +47,7 @@ gulp.task('build-js-app', ['build-js-tpl'], function () {
         conf.spa + '/app.js',
         conf.spa + '/states.js',
         conf.spa + '/services/*.js',
+        conf.spa + '/directives/*.js',
         conf.components.js,
         conf.build.js + '/tpl.js'
     ])
@@ -66,6 +67,7 @@ gulp.task('watch-js', function () {
         conf.spa + '/app.js',
         conf.spa + '/states.js',
         conf.spa + '/services/*.js',
+        conf.spa + '/directives/*.js',
         conf.components.js,
         conf.components.slim,
     ], ['build-js-app']);

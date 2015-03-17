@@ -2,7 +2,10 @@
 
 var app = angular.module('app', [
     'ui.router',
-    'app.components'
+    'app.components',
+    'app.directives',
+    'app.services',
+    'app.api'
 ]);
 
 app.config(function ($httpProvider) {
@@ -21,6 +24,8 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
 
+
 var appComponents = angular.module('app.components', []);
 var appServices = angular.module('app.services', []);
+var appDirectives = angular.module('app.directives', []);
 var appApi = angular.module('app.api', []);
