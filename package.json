@@ -1,0 +1,30 @@
+{
+  "author": "maxstbn@gmail.com",
+  "name": "AngularExampleApp",
+  "description": "каркас для приложения на angularJs + ui-router",
+  "repository": "https://github.com/vened/angular-example-app",
+  "dependencies": {
+    "del": "^1.1.1",
+    "express": "^4.12.2",
+    "gulp": "^3.8.11",
+    "gulp-angular-templatecache": "^1.5.0",
+    "gulp-bower": "0.0.10",
+    "gulp-cleanhtml": "^0.1.0",
+    "gulp-concat": "^2.5.0",
+    "gulp-imagemin": "^2.2.0",
+    "gulp-jade": "^1.0.0",
+    "gulp-md5-plus": "^0.1.6",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-slim": "0.0.13",
+    "gulp-stylus": "^2.0.0",
+    "gulp-uglifyjs": "^0.6.0",
+    "gulp-util": "^3.0.3",
+    "jade": "^1.9.2",
+    "nib": "^1.1.0",
+    "node-sprite": "^0.1.2",
+    "q": "^1.1.2",
+    "require-dir": "^0.1.0",
+    "run-sequence": "^1.0.2",
+    "underscore": "^1.7.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "spa": "./spa",
+  "libs": "./libs",
+  "img": "./spa/img",
+  "css": "./spa/css",
+  "base_css": "./spa/css/**/*.styl",
+  "components": "./spa/components",
+  "components": {
+    "js": "./spa/components/**/*.js",
+    "slim": "./spa/components/**/*.slim",
+    "css": "./spa/components/**/css/*.styl"
+  },
+  "build": {
+    "build_path": "build",
+    "img": "./build/img",
+    "css": "./build/css",
+    "js": "./build/js",
+    "libs": "./build/libs"
+  },
+  "config_path": "./bin/config.json"
+}
