@@ -3,7 +3,8 @@ html(xmlns:ng="https://angularjs.org" ng-app="app")
     head
         include ./head.jade
         include ./styles.jade
-    body(ng-controller="LoadingIndicatorController")
-        .overlay(ng-if="loading" ng-include="'balloon/tpl/index.html'")
-        div(ui-view="root")
         include ./scripts.jade
+    body
+        .page-container(ui-view="root" ng-cloak)
+        //.overlay(ng-if="loading" ng-include="'balloon/tpl/index.html'")    
+        .spinner.spinner-load-page(ng-include="'spinner/tpl/spinner.html'")    
