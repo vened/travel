@@ -14,6 +14,7 @@ var conf = require('./config');
 gulp.task('build-js-libs', function () {
     return gulp.src([
         conf.libs + '/angular/angular.min.js',
+        conf.libs + '/angular-animate/angular-animate.min.js',
         conf.libs + '/angular-ui-router/release/angular-ui-router.min.js',
         conf.libs + '/lodash/lodash.min.js'
     ])

@@ -36,3 +36,28 @@ code{
 a{
     outline none !important
 }
+    
+.container-content.ng-leave{
+    position: relative;
+}
+.container-content.ng-enter{
+    position: absolute;
+}
+.container-content.ng-enter, .container-content.ng-leave{
+    -webkit-transition: -webkit-transform 0.3s ease-in, opacity 0.3s ease-in;
+    -moz-transition: -moz-transform 0.3s ease-in, opacity 0.3s ease-in;
+    -o-transition: -o-transform 0.3s ease-in, opacity 0.3s ease-in;
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+.container-content.ng-enter, .container-content.ng-leave.ng-leave-active{
+    -webkit-transform: scaleX(0.0001);
+    -o-transform: scaleX(0.0001);
+    transform: scaleX(0.0001);
+    opacity: 0;
+}
+.container-content, .container-content.ng-enter.ng-enter-active{
+    -webkit-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1);
+    opacity: 1;
+}
