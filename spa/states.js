@@ -7,28 +7,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('root', {
 			url  : "/",
 			views: {
-				'root'       : {
+				'root'        : {
 					templateProvider: function ($templateCache) {
 						return $templateCache.get('root/tpl/index.html')
 					}
 				},
-				'header@root': {
+				'header@root' : {
 					templateProvider: function ($templateCache) {
 						return $templateCache.get('header/tpl/index.html')
 					}
 				},
-				'footer@root': {
+				'footer@root' : {
 					templateProvider: function ($templateCache) {
 						return $templateCache.get('footer/tpl/index.html')
+					}
+				},
+				'content@root': {
+					templateProvider: function ($templateCache) {
+						return $templateCache.get('index/tpl/index.html')
 					}
 				}
 			}
 		})
 		.state('about', {
-			parent : 'root',
-			url    : '^/about',
-			data   : {pageTitle: 'О компании'},
-			views  : {
+			parent: 'root',
+			url   : '^/about',
+			data  : {pageTitle: 'О компании'},
+			views : {
 				'header@root' : {
 					templateProvider: function ($templateCache) {
 						return $templateCache.get('header/tpl/index.html')
@@ -39,7 +44,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 					templateProvider: function ($timeout, $templateCache) {
 						return $timeout(function () {
 							return $templateCache.get('about/tpl/index.html')
-						}, 2000);
+						}, 100);
 					}
 				}
 			}
