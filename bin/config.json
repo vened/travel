@@ -1,6 +1,6 @@
 {
   "spa": "./spa",
-  "libs": "./libs",
+  "libs": "./spa/libs",
   "img": "./spa/img",
   "css": "./spa/css",
   "base_css": "./spa/css/**/*.styl",
