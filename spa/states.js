@@ -44,7 +44,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 					templateProvider: function ($timeout, $templateCache) {
 						return $timeout(function () {
 							return $templateCache.get('about/tpl/index.html')
-						}, 100);
+						}, 300);
 					}
 				}
 			}
