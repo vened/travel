@@ -23,8 +23,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 					}
 				},
 				'content@root': {
+					controller: 'IndexPageController',
 					templateProvider: function ($templateCache) {
-						return $templateCache.get('index/tpl/index.html')
+						return $templateCache.get('page_index/tpl/index.html')
+					},
+					resolve: {
+						page: function (IndexPageServices) {
+							return IndexPageServices.getSection(4)
+						}
 					}
 				}
 			}

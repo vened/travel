@@ -1,4 +1,4 @@
-exports.index = {
+exports.Section = {
 	2: {
 		"Slider"        : [],
 		"SectionLayouts": [

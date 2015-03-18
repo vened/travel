@@ -1,13 +1,12 @@
-appApi.factory('apiUrls', function ()
+appApi.factory('api', function ()
 {
 	function url(s)
 	{
-		//var host = 'http://price.max:4001';
-		var host = 'http://localhost:4001';
+		var host = '/api/v1';
 		return host + s;
 	}
 
 	return {
-		GET_FILTERS: url('/filters')
+		GET_SECTION: url('/Section/Get/')
 	}
 });
