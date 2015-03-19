@@ -26,6 +26,7 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
 
+
 app.controller('AppController', function ($scope, $mdSidenav) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();

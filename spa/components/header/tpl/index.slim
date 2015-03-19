@@ -1,26 +1,4 @@
-md-toolbar layout="row"
-  button ng-click="toggleSidenav('top')" hide-gt-sm="" class="menuBtn"
-    span.fa.fa-toggle-on
-      | Menu
-  h1 class="md-toolbar-tools" layout-align-gt-sm="center" Hello World
-md-subheader 
-  | Online Friends
-  span.fa.fa-toggle-on
-
-
-/nav.navbar.navbar-inverse.navbar-fixed-top
-  .container
-    .navbar-header
-      button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand ui-sref="root"
-        img alt="Brand" src="img/logo.png"
-    #navbar.collapse.navbar-collapse
-      ul.nav.navbar-nav  
-        li ui-sref-active="active"
-          a ui-sref="about" О компании
-        li
-          a href="#contact" Контакты
+a.md-toolbar-tools flex="" layout-align-="left" ui-sref="root"
+  img alt="Brand" src="/spa/img/logo.png"
+section.md-toolbar-tools layout="row" layout-sm="column" layout-align="left top"
+  md-button ui-sref="about" О компании

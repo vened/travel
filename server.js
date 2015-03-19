@@ -7,9 +7,10 @@ app.set('view engine', 'jade');
 
 app.get('/api/v1/Section/Get/:id', function (req, res) {
 	console.log('/api/v1/Section/Get/' + req.params.id);
-	setTimeout(function () {
-		res.send(mockupSection.Section[req.params.id])
-	}, 300)
+    res.send(mockupSection.Section[req.params.id])
+	//setTimeout(function () {
+	//	res.send(mockupSection.Section[req.params.id])
+	//}, 3000)
 })
 
 app.get('/*', function (req, res) {

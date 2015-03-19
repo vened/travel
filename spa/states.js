@@ -12,7 +12,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 						return $templateCache.get('root/tpl/index.html')
 					}
 				},
-				'header@root' : {
+				'header' : {
 					templateProvider: function ($templateCache) {
 						return $templateCache.get('header/tpl/index.html')
 					}
