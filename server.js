@@ -6,14 +6,15 @@ app.use(express.static('build'));
 app.set('view engine', 'jade');
 
 app.get('/api/v1/Section/Get/:id', function (req, res) {
-	console.log('/api/v1/Section/Get/' + req.params.id);
-	setTimeout(function () {
-		res.send(mockupSection.Section[req.params.id])
-	}, 1500)
+    console.log('/api/v1/Section/Get/' + req.params.id);
+    res.send(mockupSection.Section[req.params.id])
+    //setTimeout(function () {
+    //	res.send(mockupSection.Section[req.params.id])
+    //}, 300)
 })
 
 app.get('/*', function (req, res) {
-	res.render('index');
+    res.render('index');
 })
 
 app.listen(3000)

@@ -3,8 +3,7 @@ $fa-font-path = "../libs/font-awesome-stylus/fonts"
 @import "../libs/bootstrap-stylus/stylus/bootstrap.styl"
 @import "../libs/font-awesome-stylus/stylus/index.styl"
 @import "nav.styl"
-
-
+@import "spinner"
 
 html{
     position: relative;
@@ -12,11 +11,6 @@ html{
 }
 body{
     margin-bottom: 60px;
-}
-.page-container{
-    position relative
-    z-index 2
-    background #fff
 }
 .footer{
     position: absolute;
@@ -26,8 +20,11 @@ body{
     background-color: #000;
 }
 .container-content{
+    position relative
+    z-index 2
     height 100%
-    padding-top 60px
+    padding-top 51px
+    background #fff
 }
 .container .text-muted{
     margin: 20px 0;
@@ -41,15 +38,4 @@ code{
 }
 a{
     outline none !important
-}
-    
-
-.container-content.ng-enter, .container-content.ng-leave{
-    transition: opacity .3s ease-in;
-}
-.container-content.ng-enter, .container-content.ng-leave.ng-leave-active{
-    opacity: 0;
-}
-.container-content, .container-content.ng-enter.ng-enter-active{
-    opacity: 1;
 }

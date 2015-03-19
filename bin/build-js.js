@@ -27,7 +27,10 @@ gulp.task('build-js-libs', function () {
  * Сборка темплейтов
  */
 gulp.task('build-js-tpl', function () {
-    return gulp.src([conf.components.slim])
+    return gulp.src([
+        conf.components.slim,
+        conf.components + '/*.slim'
+    ])
         .pipe(slim({
             pretty: true
         }))

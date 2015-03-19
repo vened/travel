@@ -1,60 +1,43 @@
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-	/**
-	 * root state
-	 */
-	$stateProvider
-		.state('root', {
-			url  : "/",
-			views: {
-				'root'        : {
-					templateProvider: function ($templateCache) {
-						return $templateCache.get('root/tpl/index.html')
-					}
-				},
-				'header@root' : {
-					templateProvider: function ($templateCache) {
-						return $templateCache.get('header/tpl/index.html')
-					}
-				},
-				'footer@root' : {
-					templateProvider: function ($templateCache) {
-						return $templateCache.get('footer/tpl/index.html')
-					}
-				},
-				'content@root': {
-					controller: 'IndexPageController',
-					templateProvider: function ($templateCache) {
-						return $templateCache.get('page_index/tpl/index.html')
-					},
-					resolve: {
-						page: function (IndexPageServices) {
-							return IndexPageServices.getSection(4)
-						}
-					}
-				}
-			}
-		})
-		.state('about', {
-			parent: 'root',
-			url   : '^/about',
-			data  : {pageTitle: 'О компании'},
-			views : {
-				'header@root' : {
-					templateProvider: function ($templateCache) {
-						return $templateCache.get('header/tpl/index.html')
-					}
-				},
-				'content@root': {
-					controller      : 'AboutController',
-					templateProvider: function ($timeout, $templateCache) {
-						return $timeout(function () {
-							return $templateCache.get('about/tpl/index.html')
-						}, 300);
-					}
-				}
-			}
-		})
+    $stateProvider
+    /**
+     * Главная страница
+     */
+        .state('root', {
+            url: "/",
+            controller: 'IndexPageController',
+            templateProvider: function ($templateCache) {
+                return $templateCache.get('page_root/tpl/content.html')
+            },
+            resolve: {
+                page: function (IndexPageServices) {
+                    return IndexPageServices.getSection(4)
+                }
+            }
+        })
 
-	$urlRouterProvider.otherwise('/');
+
+    /**
+     * Страница о компании
+     */
+        .state('about', {
+            url: '^/about',
+            data: {pageTitle: 'О компании'},
+            views: {
+                '': {
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('page_about/tpl/index.html')
+                    }
+                },
+                'content@about': {
+                    controller: 'IndexPageController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('page_about/tpl/content.html')
+                    }
+                }
+            }
+        });
+
+    $urlRouterProvider.otherwise('/');
 });
