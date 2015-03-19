@@ -12,10 +12,10 @@
   },
   "build": {
     "build_path": "build",
-    "img": "./build/img",
-    "css": "./build/css",
-    "js": "./build/js",
-    "libs": "./build/libs"
+    "img": "./build/spa/img",
+    "css": "./build/spa/css",
+    "js": "./build/spa/js",
+    "libs": "./build/spa/libs"
   },
   "config_path": "./bin/config.json"
 }
