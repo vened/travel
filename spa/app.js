@@ -3,6 +3,7 @@
 var app = angular.module('app', [
     'ui.router',
     'ngAnimate',
+    'ngMaterial',
     'app.components',
     'app.directives',
     'app.services',
@@ -23,6 +24,12 @@ app.config(function ($locationProvider) {
 app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+});
+
+app.controller('AppController', function ($scope, $mdSidenav) {
+    $scope.toggleSidenav = function (menuId) {
+        $mdSidenav(menuId).toggle();
+    };
 });
 
 

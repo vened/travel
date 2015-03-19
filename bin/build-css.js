@@ -27,6 +27,11 @@ gulp.task('build-css-base', function () {
 		.pipe(gulp.dest(conf.build.css))
 });
 
+gulp.task('build-css-material', function () {
+	return gulp.src(conf.libs + '/angular-material/angular-material.min.css')
+		.pipe(gulp.dest(conf.build.css))
+});
+
 gulp.task('build-css-components', function () {
 	return gulp.src(conf.components.css)
 		.pipe(stylus(stylusDevOpt))
@@ -43,6 +48,7 @@ gulp.task('watch-css-components', function () {
 });
 
 gulp.task('css', [
+    'build-css-material',
 	'build-css-base',
 	'build-css-components',
 	'watch-css-base',
