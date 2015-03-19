@@ -1,5 +1,14 @@
 .container
   h3.section-header Услуги компании
+
+  h4 {{sections.Name}}
+  h5 {{sections.Description}}
+  div ng-repeat="section in page.OfferLayouts"
+    div 
+      | {{section.Row}}
+    div 
+      | {{section.OfferLayoutType}}
+  
   ul.list
   li.list-item организация групповых туров по&nbsp;всему миру;
   li.list-item  организация индивидуальных туров, в&nbsp;том числе класса VIP;

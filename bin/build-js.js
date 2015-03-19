@@ -32,7 +32,8 @@ gulp.task('build-js-tpl', function () {
         conf.components + '/*.slim'
     ])
         .pipe(slim({
-            pretty: true
+            pretty: true,
+            options: "attr_list_delims={'(' => ')', '[' => ']'}"
         }))
         .pipe(cleanhtml())
         .pipe(templateCache({

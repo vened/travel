@@ -3,10 +3,10 @@
 var app = angular.module('app', [
     'ui.router',
     'ngAnimate',
-    'app.components',
-    'app.directives',
-    'app.services',
-    'app.api'
+    'appComponents',
+    'appDirectives',
+    'appServices',
+    'appApi'
 ]);
 
 app.config(function ($httpProvider) {
@@ -26,7 +26,7 @@ app.run(function ($rootScope, $state, $stateParams) {
 });
 
 
-var appComponents = angular.module('app.components', []);
-var appServices = angular.module('app.services', []);
-var appDirectives = angular.module('app.directives', []);
-var appApi = angular.module('app.api', []);
+var appComponents = angular.module('appComponents', []);
+var appServices = angular.module('appServices', []);
+var appDirectives = angular.module('appDirectives', []);
+var appApi = angular.module('appApi', []);
