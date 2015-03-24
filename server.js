@@ -10,7 +10,7 @@ app.get('/api/v1/Section/Get/:id', function (req, res) {
     //res.send(mockupSection.Section[req.params.id])
     setTimeout(function () {
     	res.send(mockupSection.Section[req.params.id])
-    }, 800)
+    }, 10)
 })
 
 app.get('/*', function (req, res) {

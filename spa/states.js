@@ -6,13 +6,28 @@ app.config(function ($stateProvider, $urlRouterProvider) {
      */
         .state('root', {
             url: "/",
-            controller: 'IndexPageController',
-            templateProvider: function ($templateCache) {
-                return $templateCache.get('page_root/tpl/content.html')
-            },
-            resolve: {
-                page: function (IndexPageServices) {
-                    return IndexPageServices.getSection(4)
+            views: {
+                '': {
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('page_root/tpl/index.html')
+                    }
+                },
+                'content@root': {
+                    controller: 'IndexPageController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('page_root/tpl/content.html')
+                    },
+                    resolve: {
+                        page: function (IndexPageServices) {
+                            return IndexPageServices.getSection(4)
+                        }
+                    }
+                },
+                'searchForm@root': {
+                    controller: 'SearchController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('search/tpl/search.html')
+                    }
                 }
             }
         })
@@ -31,7 +46,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     }
                 },
                 'content@about': {
-                    controller: 'IndexPageController',
+                    //controller: 'IndexPageController',
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('page_about/tpl/content.html')
                     }
