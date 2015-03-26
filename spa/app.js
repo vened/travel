@@ -6,7 +6,8 @@ var app = angular.module('app', [
     'appComponents',
     'appDirectives',
     'appServices',
-    'appApi'
+    'appApi',
+    "ui.bootstrap"
 ]);
 
 app.config(function ($httpProvider) {

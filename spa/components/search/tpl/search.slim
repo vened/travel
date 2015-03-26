@@ -1,11 +1,23 @@
-form.form-inline
+form.form-inline.search-form
   .form-group
-    /input.form-control placeholder="Город вылета" type="text"
     input.form-control [
-      type = "text"
+      type="text"
       placeholder="Откуда"
+      ng-model="locationFrom"
+      typeahead="state as state.name for state in getLocationFrom($viewValue) | filter:$viewValue"
+      typeahead-wait-ms="300"
+      ng-change="fromIdError = null"
+      ]
+  .form-group
+    input.form-control [
+      class="b-inna-search-form-field-input"
+      type="text"
+      placeholder="Куда"
+      ng-model="locationTo"
+      typeahead="state as state.name for state in getLocation($viewValue) | filter:$viewValue"
+      typeahead-wait-ms="300"
+      ng-change="toIdError = null"
       ]
 
   .form-group
-    input.form-control placeholder="Город прилета" type="text"
-  button.btn.btn-info type="submit" Поиск
+    button.btn.btn-info type="submit" Поиск
