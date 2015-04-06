@@ -8,76 +8,45 @@ appComponents
             scope: {
                 partnerSite: "@",
                 partnerName: "@",
-                partnerDefaultCity: "@"
+                partnerDefaultCity: "@",
+                searchParams: "=searchParams"
             },
             controller: function ($element, $scope, SearchServices, $http, Validators) {
 
-                /**
-                 * установка текущей локали
-                 */
-                if ($scope.partnerDefaultCity) {
-                    var params = {
-                        term: $scope.partnerDefaultCity.trim()
-                    }
-                    SearchServices.getLocation(params)
-                        .success(function (data) {
-                            var fullName = data[0].Name + ", " + data[0].CountryName;
-                            $scope.locationFrom = {id: data[0].Id, name: fullName, iata: data[0].CodeIata};
-                        })
-                } else {
-                    SearchServices.getCurrentLocation()
-                        .success(function (data) {
-                            var fullName = data.Name + ", " + data.CountryName;
-                            $scope.locationFrom = {id: data.Id, name: fullName, iata: data.CodeIata};
-                        })
-                }
+
+                $scope.search = {};
+                $scope.adultCount = 2;
+
 
                 /**
-                 * https://inna.ru/api/v1/Dictionary/Directory
+                 * установка текущей локации
+                 */
+                SearchServices.getCurrentLocation($scope.partnerDefaultCity)
+                    .then(function (res) {
+                        $scope.search.locationFrom = res;
+                    });
+
+
+                /**
+                 * Выбор места вылета
                  */
                 $scope.getLocationFrom = function (val) {
-                    var params = {
-                        term: val.split(', ')[0].trim()
-                    }
-                    SearchServices.getLocation(params)
-                        .success(function (res) {
-                            var data = []
-                            angular.forEach(res, function (item) {
-                                var fullName = item.Name + ", " + item.CountryName;
-                                var allArport = item.Airport ? " (все аэропорты)" : ""
-                                var fullNameHtml = "<span class='i-name'>" + item.Name + "</span>," + "<span class='i-country'>" + item.CountryName + allArport + "</span>";
-                                data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
-                                if (item.Airport) {
-                                    angular.forEach(item.Airport, function (item) {
-                                        var fullName = item.Name + ", " + item.CountryName;
-                                        var fullNameHtml = "<span class='i-name i-name-airport'>" + item.Name + "</span>";
-                                        data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
-                                    });
-                                }
-                            });
+                    return SearchServices.getLocationFrom(val)
+                        .then(function (data) {
                             return data;
                         })
                 };
 
 
                 /**
-                 * автокомплит выбора локации
+                 * автокомплит выбора локации назначения
                  * @param val
                  * @returns {*}
                  */
-                $scope.getLocation = function (val) {
-                    var params = {
-                        term: val.split(', ')[0].trim()
-                    };
-                    return SearchServices.getLocationHotel(params)
-                        .then(function (res) {
-                            var data = []
-                            angular.forEach(res.data, function (item) {
-                                var fullName = item.CountryName + ", " + item.Name
-                                var fullNameHtml = "<span class='i-name'>" + item.CountryName + "</span>, " + "<span class='i-country'>" + item.Name + "</span>"
-                                data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
-                            });
-                            return data; 
+                $scope.getLocationTo = function (val) {
+                    return SearchServices.getLocationHotel(val)
+                        .then(function (data) {
+                            return data;
                         });
                 };
 
@@ -134,15 +103,6 @@ appComponents
                  */
 
 
-                /**
-                 * BEGIN PEOPLE_COUNTER
-                 */
-                $scope.adultCount = 2;
-                /**
-                 * END PEOPLE_COUNTER
-                 */
-
-
                 $scope.$watch('locationFrom', function (data) {
                     if (data && data.id) {
                         $scope.fromId = data.id;
@@ -192,6 +152,8 @@ appComponents
                             }
                             params[6] = childs.join('_')
                         }
+
+                        $scope.searchParams = params;
 
                         if ($scope.partnerName) {
                             var partner = "?&from=" + $scope.partnerName + "&utm_source=" + $scope.partnerName + "&utm_medium=affiliate&utm_campaign=" + $scope.toId

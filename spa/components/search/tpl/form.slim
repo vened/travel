@@ -3,14 +3,30 @@ ul.b-inna-search__nav
     | Перелет + Отель
 .b-inna-search-form
   .b-inna-row
-    form name="innaSearchForm" 
+    form name="searchForm" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-search-form-field.__typeahead
-          input.b-inna-search-form-field-input ng-change=("fromIdError = null") ng-model="locationFrom" placeholder="Откуда" type="text" typeahead=("state as state.name for state in getLocationFrom($viewValue) | filter:$viewValue") typeahead-template-url="typeaheadTemplateCustom.html" typeahead-wait-ms="300" /
+          input.b-inna-search-form-field-input [
+            ng-change=("fromIdError = null") 
+            ng-model="search.locationFrom"
+            placeholder="Откуда"
+            type="text"
+            typeahead=("state as state.name for state in getLocationFrom($viewValue) | filter:$viewValue")
+            typeahead-template-url="search/tpl/typeaheadTemplateCustom.html"
+            typeahead-wait-ms="300"
+            ]
           div error="{{fromIdError}}" error-tooltip="" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-search-form-field.__typeahead
-          input.b-inna-search-form-field-input ng-change=("toIdError = null") ng-model="locationTo" placeholder="Куда" type="text" typeahead=("state as state.name for state in getLocation($viewValue) | filter:$viewValue") typeahead-template-url="typeaheadTemplateCustom.html" typeahead-wait-ms="300" /
+          input.b-inna-search-form-field-input [
+            ng-change=("toIdError = null") 
+            ng-model="seacrh.locationTo"
+            placeholder="Куда"
+            type="text"
+            typeahead=("state as state.name for state in getLocationTo($viewValue) | filter:$viewValue")
+            typeahead-template-url="search/tpl/typeaheadTemplateCustom.html"
+            typeahead-wait-ms="300"
+            ]
           div error="{{toIdError}}" error-tooltip="" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-search-form-field.b-inna-row.input-daterange
@@ -27,8 +43,4 @@ ul.b-inna-search__nav
           .b-inna-col-xs-6
             .b-inna-search-form-field.__action
               button.b-inna-btn ng-click="innaStartSearch(innaSearchForm)"  Найти
-script id="typeaheadTemplateCustom.html" type="text/ng-template" 
-  | <div class="b-location-item"
-  | <span class="b-location-item-name" bind-html-unsafe="match.model.nameHtml"></span
-  | <span class="b-location-item-iata" bind-html-unsafe="match.model.iata"></span
-  | </div
+              

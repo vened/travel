@@ -22,4 +22,3 @@ gulp.task('build-md5-img', function () {
 		.pipe(md5(10, conf.build.css + '/*.css'))
 		.pipe(gulp.dest(conf.build.img));
 });
-
