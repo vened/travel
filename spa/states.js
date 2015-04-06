@@ -51,6 +51,32 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     }
                 }
             }
+        })
+
+    /**
+     * Результаты поиска
+     */
+        .state('result', {
+            url: '^/result/:fromId-:toId-:startDate-:endDate-:adultCount',
+            data: {pageTitle: 'Результаты поиска'},
+            views: {
+                '': {
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('result/tpl/index.html')
+                    }
+                },
+                'searchForm@result': {
+                    controller: 'ResultController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('search/tpl/search.html')
+                    }
+                },
+                'result@result': {
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('result/tpl/result.html')
+                    }
+                }
+            }
         });
 
     $urlRouterProvider.otherwise('/');

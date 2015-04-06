@@ -11,11 +11,11 @@ appComponents
                 partnerDefaultCity: "@",
                 searchParams: "=searchParams"
             },
-            controller: function ($element, $scope, SearchServices, $http, Validators) {
+            controller: function ($element, $scope, SearchServices, $state) {
 
 
                 $scope.search = {};
-                $scope.adultCount = 2;
+                $scope.search.adultCount = 2;
 
 
                 /**
@@ -23,7 +23,7 @@ appComponents
                  */
                 SearchServices.getCurrentLocation($scope.partnerDefaultCity)
                     .then(function (res) {
-                        $scope.search.locationFrom = res;
+                        $scope.search.fromId = res;
                     });
 
 
@@ -60,8 +60,8 @@ appComponents
                     var month = date.getMonth() + 1;
                     var dates = date.getDate() + "." + month + "." + date.getFullYear()
                     var oneDay;
-                    if ($scope.startDate == $scope.endDate) {
-                        oneDay = $scope.startDate;
+                    if ($scope.search.startDate == $scope.search.endDate) {
+                        oneDay = $scope.search.startDate;
                     }
 
                     if (dates == oneDay) {
@@ -69,12 +69,12 @@ appComponents
                             classes: 'one_date'
                         };
                     } else {
-                        if (dates == $scope.startDate) {
+                        if (dates == $scope.search.startDate) {
                             return {
                                 classes: 'from_date'
                             };
                         }
-                        if (dates == $scope.endDate) {
+                        if (dates == $scope.search.endDate) {
                             return {
                                 classes: 'to_date'
                             };
@@ -103,114 +103,19 @@ appComponents
                  */
 
 
-                $scope.$watch('locationFrom', function (data) {
-                    if (data && data.id) {
-                        $scope.fromId = data.id;
-                    } else {
-                        $scope.fromId = null;
-                    }
-                });
-                $scope.$watch('locationTo', function (data) {
-                    if (data && data.id) {
-                        $scope.toId = data.id;
-                    } else {
-                        $scope.toId = null;
-                    }
-                });
-                $scope.startDateError = null;
-                $scope.endDateError = null;
-                $scope.$watch('startDate', function (data) {
-                    $scope.startDate = data;
-                });
-                $scope.$watch('endDate', function (data) {
-                    $scope.endDate = data;
-                });
-
                 /**
-                 * Старт поиска
-                 * "6733-6623-13.11.2014-19.11.2014-1-2-5_0_11"
-                 * @param innaSearchForm
+                 * startSearch
                  */
-                $scope.innaStartSearch = function (innaSearchForm) {
-
-                    try {
-                        validate();
-
-                        var params = [];
-                        params.push($scope.fromId)
-                        params.push($scope.toId)
-                        params.push($scope.startDate)
-                        params.push($scope.endDate)
-                        params.push(0)
-                        params.push($scope.adultCount)
-                        params[6] = ''
-
-                        if ($scope.childrensAge) {
-                            var childs = [];
-                            for (var i = 0; i < $scope.childrensAge.length; i++) {
-                                childs.push($scope.childrensAge[i].value)
-                            }
-                            params[6] = childs.join('_')
-                        }
-
-                        $scope.searchParams = params;
-
-                        if ($scope.partnerName) {
-                            var partner = "?&from=" + $scope.partnerName + "&utm_source=" + $scope.partnerName + "&utm_medium=affiliate&utm_campaign=" + $scope.toId
-                        } else {
-                            var partner = ''
-                        }
-
-
-                        if (!$scope.fromToEqual && innaSearchForm.$valid == true) {
-                            //?&from=[идентификатор партнера]&utm_source=[идентификатор партнера]&utm_medium=affiliate&utm_campaign=[страна направления куда]"
-                            window.open($scope.partnerSite + "/#/packages/search/" + params.join('-') + partner, '_blank')
-                        }
-                    } catch (e) {
-                        if ($scope.hasOwnProperty(e.message)) {
-                            $scope[e.message] = e;
-                        }
-                    }
+                $scope.startSearch = function (form) {
+                    $state.go("result", {
+                        fromId: $scope.search.fromId.id,
+                        toId: $scope.search.toId.id,
+                        startDate: $scope.search.startDate,
+                        endDate: $scope.search.endDate,
+                        adultCount: $scope.search.adultCount
+                    });
                 }
 
-
-                /**
-                 * BEGIN validates
-                 */
-                function validate() {
-                    Validators.required($scope.fromId, Error('fromId'), "Введите город отправления");
-                    Validators.required($scope.toId, Error('toId'), "Введите город или страну, куда планируете поехать");
-                    Validators.noEqual($scope.fromId, $scope.toId, Error('toId'), "Города отправления и назначения должны отличаться");
-
-                    Validators.required($scope.startDate, Error('startDateError'), "Выберите дату отправления туда");
-                    Validators.required($scope.endDate, Error('endDateError'), "Выберите дату отправления обратно");
-
-                };
-                $scope.$watch('fromId', function (value) {
-                    if (value instanceof Error) {
-                        $scope.fromIdError = value.text;
-                    }
-                });
-                $scope.$watch('toId', function (value) {
-                    if (value instanceof Error) {
-                        $scope.toIdError = value.text;
-                    }
-                });
-                $scope.$watch('startDateError', function (value) {
-                    if (value instanceof Error) {
-                        $scope.startDateError = value.text;
-                    }
-                });
-                $scope.$watch('endDateError', function (value) {
-                    if (value instanceof Error) {
-                        $scope.endDateError = value.text;
-                    }
-                });
-
-
-                /**
-                 * END validates
-                 */
 
             }
         }

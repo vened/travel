@@ -6,6 +6,7 @@ var cleanhtml = require('gulp-cleanhtml');
 var ngAnnotate = require('gulp-ng-annotate');
 var slim = require("gulp-slim");
 var conf = require('./config');
+var livereload = require('gulp-livereload');
 
 
 /**
@@ -46,20 +47,20 @@ gulp.task('build-js-tpl', function () {
         }))
         .pipe(concat('tpl.js'))
         .pipe(gulp.dest(conf.build.js))
+        .pipe(livereload());
 });
 
 
 /**
  * Сборка приложения
  */
-gulp.task('build-js-app', ['build-js-tpl'], function () {
+gulp.task('build-js-app', function () {
     return gulp.src([
         conf.spa + '/app.js',
         conf.spa + '/states.js',
         conf.spa + '/services/*.js',
         conf.spa + '/directives/*.js',
         conf.components.js,
-        conf.build.js + '/tpl.js'
     ])
         .pipe(ngAnnotate())
         .pipe(concat('app.js'))
@@ -69,7 +70,8 @@ gulp.task('build-js-app', ['build-js-tpl'], function () {
             enclose: true,
             outSourceMap: false
         }))
-        .pipe(gulp.dest(conf.build.js));
+        .pipe(gulp.dest(conf.build.js))
+        .pipe(livereload());
 });
 
 gulp.task('watch-js', function () {
@@ -84,8 +86,17 @@ gulp.task('watch-js', function () {
 });
 
 
+gulp.task('watch-tpl', function () {
+    gulp.watch([
+        conf.components.slim,
+    ], ['build-js-tpl']);
+});
+
+
 gulp.task('js', [
     'build-js-libs',
+    'build-js-tpl',
     'build-js-app',
-    'watch-js'
+    'watch-js',
+    'watch-tpl'
 ]);
