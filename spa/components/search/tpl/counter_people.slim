@@ -1,0 +1,26 @@
+.inna-dropdown
+  .inna-dropdown-action
+    | {{ adultCount + childrenCount| asQuantity:"человек":"человека":"человек"}}
+    i.inna-arrow-bottom
+  .inna-dropdown-dialog ng-show="isOpen" 
+    .inna-dropdown-dialog_title Туристы
+    .inna-dropdown-dialog_label Взрослые
+    ul.inna-dropdown-dialog-btns
+      li.inna-dropdown-dialog-btns_btn ng-class=("{selected:adultCount == count}") ng-click="onCounterClick('adultCount', count)" ng-if=("count > 0") ng-repeat=("count in [] | range:5") 
+        | {{ count }}
+    .inna-dropdown-dialog_label Дети
+    ul.inna-dropdown-dialog-btns
+      li.inna-dropdown-dialog-btns_btn ng-class=("{selected:childrenCount == count}") ng-click="onCounterClick('childrenCount', count)" ng-repeat=("count in [] | range:4") 
+        | {{ count }}
+    .inna-dropdown-dialog_label ng-show=("childrenCount > 0") 
+      ng-pluralize[
+          count="childrenCount" 
+          when="{'0': '','one': 'Возраст ребенка','other': 'Возраст детей'}"
+        ]
+    .inna-dropdown-age-row
+      div [
+          counter-people-child-age-selector="" 
+          ng-class="{'inna-dropdown-age-col-2': childrensAge.length == 2), 'inna-dropdown-age-col-1': childrensAge.length == 1}" 
+          ng-repeat="selector in childrensAge" 
+          selector="selector"
+        ]

@@ -13,11 +13,15 @@ var conf = require('./config');
  */
 gulp.task('build-js-libs', function () {
     return gulp.src([
+        conf.libs + '/jquery/dist/jquery.min.js',
+        conf.libs + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+        conf.libs + '/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ru.min.js',
         conf.libs + '/angular/angular.min.js',
         conf.libs + '/angular-animate/angular-animate.min.js',
+        conf.libs + '/angular-sanitize/angular-sanitize.min.js',
         conf.libs + '/angular-ui-router/release/angular-ui-router.min.js',
         conf.libs + '/lodash/lodash.min.js',
-        conf.hand_libs + '/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.12.1.min.js',
+        conf.hand_libs + '/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.12.1.min.js'
     ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest(conf.build.js));

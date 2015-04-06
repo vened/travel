@@ -1,0 +1,7 @@
+.inna-dropdown-age dropdown="" 
+  .inna-dropdown-age-toggle dropdown-toggle="" 
+    | {{ selector.value }}
+    i.inna-arrow-bottom
+  ul.inna-dropdown-age-dialog role="menu" 
+    li ng-click="onChoose(age)" ng-repeat=("age  in [] | range:18") 
+      | {{ age | asQuantity:"год":"года":"лет"}}

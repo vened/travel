@@ -24,7 +24,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     }
                 },
                 'searchForm@root': {
-                    controller: 'SearchController',
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('search/tpl/search.html')
                     }
