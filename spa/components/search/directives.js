@@ -11,11 +11,16 @@ appComponents
                 partnerDefaultCity: "@",
                 searchParams: "=searchParams"
             },
-            controller: function ($element, $scope, SearchServices, $state) {
-
+            controller: function ($element, $scope, SearchServices, $state, $stateParams) {
 
                 $scope.search = {};
-                $scope.search.adultCount = 2;
+                
+                $scope.search.DepartureId = $stateParams.DepartureId;
+                $scope.search.ArrivalId = $stateParams.ArrivalId;
+                $scope.search.StartVoyageDate = $stateParams.StartVoyageDate;
+                $scope.search.EndVoyageDate = $stateParams.EndVoyageDate;
+                $scope.search.Adult = $stateParams.Adult ? $stateParams.Adult : 2;
+
 
 
                 /**
@@ -23,7 +28,7 @@ appComponents
                  */
                 SearchServices.getCurrentLocation($scope.partnerDefaultCity)
                     .then(function (res) {
-                        $scope.search.fromId = res;
+                        $scope.search.DepartureId = res;
                     });
 
 
@@ -60,8 +65,8 @@ appComponents
                     var month = date.getMonth() + 1;
                     var dates = date.getDate() + "." + month + "." + date.getFullYear()
                     var oneDay;
-                    if ($scope.search.startDate == $scope.search.endDate) {
-                        oneDay = $scope.search.startDate;
+                    if ($scope.search.StartVoyageDate == $scope.search.endDate) {
+                        oneDay = $scope.search.StartVoyageDate;
                     }
 
                     if (dates == oneDay) {
@@ -69,12 +74,12 @@ appComponents
                             classes: 'one_date'
                         };
                     } else {
-                        if (dates == $scope.search.startDate) {
+                        if (dates == $scope.search.StartVoyageDate) {
                             return {
                                 classes: 'from_date'
                             };
                         }
-                        if (dates == $scope.search.endDate) {
+                        if (dates == $scope.search.EndVoyageDate) {
                             return {
                                 classes: 'to_date'
                             };
@@ -90,9 +95,9 @@ appComponents
                 });
 
                 $element.find('.input-daterange').datepicker({
-                    format: "d.m.yyyy",
-                    startDate: $scope.setStartDate,
-                    endDate: new Date($scope.setStartDate.valueOf() + 86400000 * 365),
+                    format: "dd.mm.yyyy",
+                    StartVoyageDate: $scope.setStartDate,
+                    EndVoyageDate: new Date($scope.setStartDate.valueOf() + 86400000 * 365),
                     language: "ru",
                     autoclose: true,
                     todayHighlight: true,
@@ -107,13 +112,16 @@ appComponents
                  * startSearch
                  */
                 $scope.startSearch = function (form) {
-                    $state.go("result", {
-                        fromId: $scope.search.fromId.id,
-                        toId: $scope.search.toId.id,
-                        startDate: $scope.search.startDate,
-                        endDate: $scope.search.endDate,
-                        adultCount: $scope.search.adultCount
-                    });
+                    if (form.$valid) {
+                        $state.go("result", {
+                            DepartureId: $scope.search.DepartureId.id,
+                            ArrivalId: $scope.search.ArrivalId.id,
+                            StartVoyageDate: $scope.search.StartVoyageDate,
+                            EndVoyageDate: $scope.search.EndVoyageDate,
+                            Adult: $scope.search.Adult,
+                            TicketClass: 0
+                        });
+                    }
                 }
 
 

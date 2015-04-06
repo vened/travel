@@ -57,7 +57,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
      * Результаты поиска
      */
         .state('result', {
-            url: '^/result/:fromId-:toId-:startDate-:endDate-:adultCount',
+            // ?DepartureId=6733&ArrivalId=6623&StartVoyageDate=2015-05-11&EndVoyageDate=2015-05-17&TicketClass=0&Adult=2&HotelId=&TicketId=&AddFilter=true&_=1428327815957
+            url: '^/result/:DepartureId-:ArrivalId-:StartVoyageDate-:EndVoyageDate-:TicketClass-:Adult-:HotelId-:TicketId-AddFilter',
             data: {pageTitle: 'Результаты поиска'},
             views: {
                 '': {
@@ -66,12 +67,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     }
                 },
                 'searchForm@result': {
-                    controller: 'ResultController',
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('search/tpl/search.html')
                     }
                 },
                 'result@result': {
+                    controller: 'ResultController',
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('result/tpl/result.html')
                     }

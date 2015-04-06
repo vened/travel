@@ -1,1 +1,23 @@
 h1 result
+input type="search" ng-model="q" placeholder="filter hotels"
+
+div ng-init="datas = data.Hotels"
+
+.example-animate-container ui-scroll-viewport="" style="height:200px"
+  | {{datasource}}
+  .animate-repeat.panel.panel-default ui-scroll="hotel in datasource" buffer-size="3" padding="30"
+    .panel-heading
+      | {{::hotel.HotelName}}
+    .panel-body
+      .row
+        .col-md-4
+          span.thumbnail
+            img ng-src="{{::hotel.Photo}}"
+        .col-md-8
+          h5 {{::hotel.HotelCityName}}
+          h5 {{::hotel.Address}}
+          h5 {{::hotel.Stars}}
+          h5 {{::hotel.RoomCount}}
+          h5 {{::hotel.HotelType}}
+          h5 {{::hotel.Price}}
+          h5 {{::hotel.PackagePrice}}

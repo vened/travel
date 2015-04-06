@@ -8,53 +8,57 @@ ul.b-inna-search__nav
         .b-inna-search-form-field.__typeahead
           input.b-inna-search-form-field-input [
             ng-change=("fromIdError = null")
-            name="fromId" 
-            ng-model="search.fromId"
+            name="DepartureId" 
+            ng-model="search.DepartureId"
             placeholder="Откуда"
             type="text"
             typeahead=("state as state.name for state in getLocationFrom($viewValue) | filter:$viewValue")
             typeahead-template-url="search/tpl/typeaheadTemplateCustom.html"
             typeahead-wait-ms="300"
+            required=""
             ]
           div error="{{fromIdError}}" error-tooltip="" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-search-form-field.__typeahead
           input.b-inna-search-form-field-input [
             ng-change=("toIdError = null")
-            name="toId" 
-            ng-model="search.toId"
+            name="ArrivalId" 
+            ng-model="search.ArrivalId"
             placeholder="Куда"
             type="text"
             typeahead=("state as state.name for state in getLocationTo($viewValue) | filter:$viewValue")
             typeahead-template-url="search/tpl/typeaheadTemplateCustom.html"
             typeahead-wait-ms="300"
+            required=""
             ]
           div error="{{toIdError}}" error-tooltip="" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-search-form-field.b-inna-row.input-daterange
           .b-inna-col-xs-6
             input.b-inna-search-form-field-input.b-inna-datapicker.from_date [
-              name="startDate"
+              name="StartVoyageDate"
               ng-focus=("startDateError = null") 
-              ng-model="search.startDate"
+              ng-model="search.StartVoyageDate"
               placeholder="Туда"
               type="text"
+              required=""
               ]
             div error="{{startDateError}}" error-tooltip="" 
           .b-inna-col-xs-6
             input.b-inna-search-form-field-input.b-inna-datapicker.to_date [
-              name="endDate"
+              name="EndVoyageDate"
               ng-focus=("endDateError = null") 
-              ng-model="search.endDate"
+              ng-model="search.EndVoyageDate"
               placeholder="Обратно"
               type="text"
+              required=""
               ]
             div error="{{endDateError}}" error-tooltip="" 
       .b-inna-col-xs-3.b-inna-col-lg-6.b-inna-col-sm-12
         .b-inna-row
           .b-inna-col-xs-6
             .b-wrapp_type_inline [
-            adult-count="search.adultCount" 
+            adult-count="search.Adult" 
             children-count="search.childrenCount" 
             childrens-age="search.childrensAge" 
             counter-people=""
@@ -62,5 +66,3 @@ ul.b-inna-search__nav
           .b-inna-col-xs-6
             .b-inna-search-form-field.__action
               button.b-inna-btn ng-click="startSearch(searchForm)"  Найти
-
-| {{search}}      

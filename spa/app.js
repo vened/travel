@@ -7,7 +7,9 @@ var app = angular.module('app', [
     'appDirectives',
     'appServices',
     'appApi',
-    "ui.bootstrap"
+    "ui.bootstrap",
+    'ui.scroll',
+    'ui.scroll.jqlite'
 ]);
 
 app.config(function ($httpProvider) {
