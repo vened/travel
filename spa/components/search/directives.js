@@ -1,6 +1,7 @@
 appComponents
 
-    .directive('travelSearchForm', function ($templateCache) {
+
+    .directive('searchForm', function ($templateCache) {
         return {
             restrict: 'E',
             template: $templateCache.get('search/tpl/form.html'),
@@ -9,52 +10,53 @@ appComponents
                 partnerName: "@",
                 partnerDefaultCity: "@"
             },
-            controller: ['$element', '$scope', '$http', 'Validators', function ($element, $scope, $http, Validators) {
+            controller: function ($element, $scope, SearchServices, $http, Validators) {
 
                 /**
                  * установка текущей локали
                  */
                 if ($scope.partnerDefaultCity) {
-                    $http.get('https://inna.ru/api/v1/Dictionary/Directory', {
-                        params: {
-                            term: $scope.partnerDefaultCity.trim()
-                        }
-                    }).then(function (response) {
-                        var fullName = response.data[0].Name + ", " + response.data[0].CountryName;
-                        $scope.locationFrom = {id: response.data[0].Id, name: fullName, iata: response.data[0].CodeIata};
-                    });
+                    var params = {
+                        term: $scope.partnerDefaultCity.trim()
+                    }
+                    SearchServices.getLocation(params)
+                        .success(function (data) {
+                            var fullName = data[0].Name + ", " + data[0].CountryName;
+                            $scope.locationFrom = {id: data[0].Id, name: fullName, iata: data[0].CodeIata};
+                        })
                 } else {
-                    $http.get('https://inna.ru/api/v1/Dictionary/GetCurrentLocation').success(function (response) {
-                        var fullName = response.Name + ", " + response.CountryName;
-                        $scope.locationFrom = {id: response.Id, name: fullName, iata: response.CodeIata};
-                    });
+                    SearchServices.getCurrentLocation()
+                        .success(function (data) {
+                            var fullName = data.Name + ", " + data.CountryName;
+                            $scope.locationFrom = {id: data.Id, name: fullName, iata: data.CodeIata};
+                        })
                 }
 
                 /**
                  * https://inna.ru/api/v1/Dictionary/Directory
                  */
                 $scope.getLocationFrom = function (val) {
-                    return $http.get('https://inna.ru/api/v1/Dictionary/Directory', {
-                        params: {
-                            term: val.split(', ')[0].trim()
-                        }
-                    }).then(function (response) {
-                        var data = []
-                        angular.forEach(response.data, function (item) {
-                            var fullName = item.Name + ", " + item.CountryName;
-                            var allArport = item.Airport ? " (все аэропорты)" : ""
-                            var fullNameHtml = "<span class='i-name'>" + item.Name + "</span>," + "<span class='i-country'>" + item.CountryName + allArport + "</span>";
-                            data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
-                            if (item.Airport) {
-                                angular.forEach(item.Airport, function (item) {
-                                    var fullName = item.Name + ", " + item.CountryName;
-                                    var fullNameHtml = "<span class='i-name i-name-airport'>" + item.Name + "</span>";
-                                    data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
-                                });
-                            }
-                        });
-                        return data;
-                    });
+                    var params = {
+                        term: val.split(', ')[0].trim()
+                    }
+                    SearchServices.getLocation(params)
+                        .success(function (res) {
+                            var data = []
+                            angular.forEach(res, function (item) {
+                                var fullName = item.Name + ", " + item.CountryName;
+                                var allArport = item.Airport ? " (все аэропорты)" : ""
+                                var fullNameHtml = "<span class='i-name'>" + item.Name + "</span>," + "<span class='i-country'>" + item.CountryName + allArport + "</span>";
+                                data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
+                                if (item.Airport) {
+                                    angular.forEach(item.Airport, function (item) {
+                                        var fullName = item.Name + ", " + item.CountryName;
+                                        var fullNameHtml = "<span class='i-name i-name-airport'>" + item.Name + "</span>";
+                                        data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
+                                    });
+                                }
+                            });
+                            return data;
+                        })
                 };
 
 
@@ -64,19 +66,19 @@ appComponents
                  * @returns {*}
                  */
                 $scope.getLocation = function (val) {
-                    return $http.get('https://inna.ru/api/v1/Dictionary/Hotel', {
-                        params: {
-                            term: val.split(', ')[0].trim()
-                        }
-                    }).then(function (response) {
-                        var data = []
-                        angular.forEach(response.data, function (item) {
-                            var fullName = item.Name + ", " + item.CountryName
-                            var fullNameHtml = "<span class='i-name'>" + item.Name + "</span>," + "<span class='i-country'>" + item.CountryName + "</span>"
-                            data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
+                    var params = {
+                        term: val.split(', ')[0].trim()
+                    };
+                    return SearchServices.getLocationHotel(params)
+                        .then(function (res) {
+                            var data = []
+                            angular.forEach(res.data, function (item) {
+                                var fullName = item.CountryName + ", " + item.Name
+                                var fullNameHtml = "<span class='i-name'>" + item.CountryName + "</span>, " + "<span class='i-country'>" + item.Name + "</span>"
+                                data.push({id: item.Id, nameHtml: fullNameHtml, name: fullName, iata: item.CodeIata});
+                            });
+                            return data; 
                         });
-                        return data;
-                    });
                 };
 
 
@@ -248,7 +250,7 @@ appComponents
                  * END validates
                  */
 
-            }]
+            }
         }
     })
 
@@ -304,6 +306,7 @@ appComponents
         }
     })
 
+
     .directive('counterPeopleChildAgeSelector', function ($templateCache) {
         return {
             template: $templateCache.get('search/tpl/counter_people.subcomponent.html'),
@@ -319,6 +322,7 @@ appComponents
             requires: '^counterPeople'
         }
     })
+
 
     .directive('errorTooltip', function ($templateCache, $timeout) {
         return {
