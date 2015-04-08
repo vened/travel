@@ -1,16 +1,25 @@
-h2 offers
+.offers.clearfix ng-repeat="item in ::offers"
 
-.offers ng-repeat="item in ::offers"
-  
-  .offer.offer-xl ng-if="item.OfferLayoutType == 'XL'"
-    img.offer-img src="{{::item.Offer1.Image}}"
-    a href="{{::item.Offer1.Url}}" class="offer-info" ng-class="{'offer-darken' : item.Offer1.NeedFilterBrightness}"
-      .offer-info-container 
-        .offer-title  {{::item.Offer1.BackTitleRow1}}
-        .offer-title.hover-show  {{::item.Offer1.BackTitleRow2}}
-        .offer-content.hover-hide {{::item.Offer1.BackTitleRow2}}
-        .offer-content.hover-show {{::item.Offer1.BackSubTitleRow2}}
-        .offer-content 
-          | от 
-          strong {{::item.Offer1.BackPrice}}
+  / offer XL
+  offer-content ng-if="item.OfferLayoutType == 'XL'" offer="item.Offer1"
     
+  / offer L2S
+  offer-content ng-if="item.OfferLayoutType == 'L2S'" offer="item.Offer1" offer-class="'large pull-left'"
+  offer-content ng-if="item.OfferLayoutType == 'L2S'" offer="item.Offer2" offer-class="'small pull-left'"
+  offer-content ng-if="item.OfferLayoutType == 'L2S'" offer="item.Offer3" offer-class="'small pull-left'"
+    
+  / offer 2SL
+  offer-content ng-if="item.OfferLayoutType == '2SL'" offer="item.Offer1" offer-class="'large pull-right'"
+  offer-content ng-if="item.OfferLayoutType == '2SL'" offer="item.Offer2" offer-class="'small pull-left'"
+  offer-content ng-if="item.OfferLayoutType == '2SL'" offer="item.Offer3" offer-class="'small pull-left'"
+    
+  / offer 2M
+  offer-content ng-if="item.OfferLayoutType == '2M'" offer="item.Offer1" offer-class="'large-2 pull-left'"
+  offer-content ng-if="item.OfferLayoutType == '2M'" offer="item.Offer2" offer-class="'large-2 pull-right'"
+    
+  / offer L3L3L3
+  offer-content ng-if="item.OfferLayoutType == 'L3L3L3'" offer="item.Offer1" offer-class="'small pull-left'"
+  offer-content ng-if="item.OfferLayoutType == 'L3L3L3'" offer="item.Offer2" offer-class="'small pull-left'"
+  offer-content ng-if="item.OfferLayoutType == 'L3L3L3'" offer="item.Offer3" offer-class="'small pull-left'"
+    
+  

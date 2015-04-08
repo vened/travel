@@ -4,7 +4,7 @@ var tasks = require('require-dir')('./bin');
 
 gulp.task('default', function (callback) {
 		runSequence(
-			'clear-build',
+			//'clear-build',
 			'bower-install',
 			'css',
 			'js',

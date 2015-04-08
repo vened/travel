@@ -1,0 +1,13 @@
+.offer ng-class="offerClass"
+  .offer-inner
+    img.offer-img src="{{::offer.Image}}"
+    a href="{{::offer.Url}}" class="offer-info" ng-class="{'offer-darken' : offer.NeedFilterBrightness}"
+      .offer-info-container
+        .offer-title  {{::offer.BackTitleRow1}}
+        .offer-title.hover-show  {{::offer.BackTitleRow2}}
+        .offer-content.hover-hide {{::offer.BackTitleRow2}}
+        .offer-content.hover-show {{::offer.BackSubTitleRow2}}
+        .offer-content
+          | от 
+          strong {{::offer.BackPrice}}
+          

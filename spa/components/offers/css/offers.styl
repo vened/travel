@@ -1,13 +1,6 @@
-.offers{
-    position relative
-    margin 0 -5px
-}
-.offer{
-    position relative
-    margin 10px 5px
-}
 .offer-img{
     position relative
+    width 100%
     vertical-align top
 }
 .offer-info{
@@ -34,7 +27,7 @@
         &.offer-darken{
             background-color rgba(0, 0, 0, .45)
         }
-            
+
         .hover-show{
             display block
         }
@@ -57,6 +50,8 @@
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 44px;
+    line-height: 50px;
 }
 .hover-show{
     display none
@@ -68,9 +63,35 @@
     font-size: 24px;
     margin-top: 6px;
 }
-.offer-xl{
-    .offer-title{
-        font-size: 44px;
-        line-height: 50px;
+.offers{
+    margin 0 -5px
+}
+.offer{
+    width 100%
+    padding 5px
+
+    .offer-inner{
+        position relative
+        overflow hidden
     }
-} 
+
+    &.large{
+        width 66.7%
+        .offer-title{
+
+        }
+    }
+    &.large-2{
+        width 50%
+        .offer-title{
+
+        }
+    }
+    &.small{
+        width 33.3%
+        
+        .offer-title{
+
+        }
+    }
+}
