@@ -12,18 +12,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                         return $templateCache.get('page_root/tpl/index.html')
                     }
                 },
-                'content@root': {
-                    controller: 'IndexPageController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('page_root/tpl/content.html')
-                    }
-                },
                 'carousel@root': {
-                    abstract: true,
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('carousel/tpl/carousel.html')
                     },
                     controller: 'SliderController'
+                },
+                'offers@root': {
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('offers/tpl/offers.html')
+                    },
+                    controller: 'OffersController'
                 },
                 'searchForm@root': {
                     templateProvider: function ($templateCache) {
@@ -32,8 +31,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             },
             resolve: {
-                pageSections: function (IndexPageServices) {
-                    return IndexPageServices.getSection(4)
+                pageSections: function (SectionsServices) {
+                    return SectionsServices.getSection(4)
                 }
             }
         })

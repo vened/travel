@@ -1,0 +1,76 @@
+.offers{
+    position relative
+    margin 0 -5px
+}
+.offer{
+    position relative
+    margin 10px 5px
+}
+.offer-img{
+    position relative
+    vertical-align top
+}
+.offer-info{
+    position absolute
+    left 0
+    top 0
+    z-index 2
+    width 100%
+    height 100%
+    color #fff
+    text-align center
+
+    &:before{
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    &:hover{
+        color #fff
+        text-decoration none
+
+        &.offer-darken{
+            background-color rgba(0, 0, 0, .45)
+        }
+            
+        .hover-show{
+            display block
+        }
+        .hover-hide{
+            display none
+        }
+    }
+
+    &.offer-darken{
+        background-color rgba(0, 0, 0, .25)
+    }
+}
+.offer-info-container{
+    display: inline-block;
+    vertical-align: middle;
+    width: 95%;
+}
+.offer-title{
+    color: #fff;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.hover-show{
+    display none
+}
+.hover-hide{
+    display block
+}
+.offer-content{
+    font-size: 24px;
+    margin-top: 6px;
+}
+.offer-xl{
+    .offer-title{
+        font-size: 44px;
+        line-height: 50px;
+    }
+} 

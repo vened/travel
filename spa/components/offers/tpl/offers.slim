@@ -1,0 +1,16 @@
+h2 offers
+
+.offers ng-repeat="item in ::offers"
+  
+  .offer.offer-xl ng-if="item.OfferLayoutType == 'XL'"
+    img.offer-img src="{{::item.Offer1.Image}}"
+    a href="{{::item.Offer1.Url}}" class="offer-info" ng-class="{'offer-darken' : item.Offer1.NeedFilterBrightness}"
+      .offer-info-container 
+        .offer-title  {{::item.Offer1.BackTitleRow1}}
+        .offer-title.hover-show  {{::item.Offer1.BackTitleRow2}}
+        .offer-content.hover-hide {{::item.Offer1.BackTitleRow2}}
+        .offer-content.hover-show {{::item.Offer1.BackSubTitleRow2}}
+        .offer-content 
+          | от 
+          strong {{::item.Offer1.BackPrice}}
+    
