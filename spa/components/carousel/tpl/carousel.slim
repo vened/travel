@@ -1,0 +1,8 @@
+carousel interval="myInterval" no-transition="false"
+  slide ng-repeat="slide in slides" active="slide.active"
+    img ng-src="{{slide.Image}}" style="margin:auto;"
+    div class="carousel-caption"
+      h2 {{slide.FrontTitleRow1}}
+      p {{slide.FrontSubTitleRow1}}
+      p {{slide.FrontSubTitleRow2}}
+      p {{slide.FrontPrice}}

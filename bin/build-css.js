@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 var concat = require('gulp-concat');
 var nib = require('nib');
+var livereload = require('gulp-livereload');
 var conf = require('./config');
 
 
@@ -25,6 +26,7 @@ gulp.task('build-css-base', function () {
 		.pipe(stylus(stylusDevOpt))
 		.pipe(concat('base.css'))
 		.pipe(gulp.dest(conf.build.css))
+        .pipe(livereload());
 });
 
 gulp.task('build-css-components', function () {
@@ -32,6 +34,7 @@ gulp.task('build-css-components', function () {
 		.pipe(stylus(stylusDevOpt))
 		.pipe(concat('components.css'))
 		.pipe(gulp.dest(conf.build.css))
+        .pipe(livereload());
 });
 
 gulp.task('watch-css-base', function () {

@@ -16,17 +16,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     controller: 'IndexPageController',
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('page_root/tpl/content.html')
-                    },
-                    resolve: {
-                        page: function (IndexPageServices) {
-                            return IndexPageServices.getSection(4)
-                        }
                     }
+                },
+                'carousel@root': {
+                    abstract: true,
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('carousel/tpl/carousel.html')
+                    },
+                    controller: 'SliderController'
                 },
                 'searchForm@root': {
                     templateProvider: function ($templateCache) {
                         return $templateCache.get('search/tpl/search.html')
                     }
+                }
+            },
+            resolve: {
+                pageSections: function (IndexPageServices) {
+                    return IndexPageServices.getSection(4)
                 }
             }
         })

@@ -21,7 +21,7 @@ gulp.task('build-js-libs', function () {
         conf.libs + '/angular-animate/angular-animate.min.js',
         conf.libs + '/angular-sanitize/angular-sanitize.min.js',
         conf.libs + '/angular-ui-router/release/angular-ui-router.min.js',
-        //conf.libs + '/lodash/lodash.min.js',
+        conf.libs + '/angular-ui-utils/ui-utils.js',
         conf.hand_libs + '/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.12.1.min.js'
     ])
         .pipe(concat('libs.js'))
@@ -60,7 +60,6 @@ gulp.task('build-js-app', function () {
         conf.spa + '/states.js',
         conf.spa + '/services/*.js',
         conf.spa + '/directives/*.js',
-        conf.libs + '/angular-ui-utils/ui-utils.js',
         conf.components.js,
     ])
         .pipe(ngAnnotate())

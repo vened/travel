@@ -1,0 +1,56 @@
+.carousel-container{
+
+    .item{
+        height 450px
+        width 100%
+        overflow hidden
+
+        img{
+            position absolute
+            height 450px
+            max-width inherit
+            left 50%
+            transform translateX(-50%)
+        }
+    }
+}
+.carousel-indicators{
+    width 960px
+    margin-left -(960 / 2) px
+    text-align left
+
+    li{
+        display: inline-block;
+        height: 12px;
+        width: 12px;
+        margin 0 4px 0 0
+        border: 2px solid #fff;
+        border-radius: 8px;
+        background-color: transparent;
+        cursor: pointer;
+        text-indent: -999px;
+
+        &.active{
+            margin-right 4px
+        }
+    }
+}
+.carousel-caption{
+    left 50%
+    right auto
+    width 960px
+    margin-left -(960 / 2) px
+    text-align left
+
+    h2{
+        font-size 32px
+    }
+
+    p{
+        margin 12px 0
+        font-size 20px
+    }
+}
+.carousel-control{
+    display none
+}
