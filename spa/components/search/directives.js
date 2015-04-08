@@ -14,13 +14,12 @@ appComponents
             controller: function ($element, $scope, SearchServices, $state, $stateParams) {
 
                 $scope.search = {};
-                
+
                 $scope.search.DepartureId = $stateParams.DepartureId;
                 $scope.search.ArrivalId = $stateParams.ArrivalId;
                 $scope.search.StartVoyageDate = $stateParams.StartVoyageDate;
                 $scope.search.EndVoyageDate = $stateParams.EndVoyageDate;
                 $scope.search.Adult = $stateParams.Adult ? $stateParams.Adult : 2;
-
 
 
                 /**
@@ -65,10 +64,9 @@ appComponents
                     var month = date.getMonth() + 1;
                     var dates = date.getDate() + "." + month + "." + date.getFullYear()
                     var oneDay;
-                    if ($scope.search.StartVoyageDate == $scope.search.endDate) {
+                    if ($scope.search.StartVoyageDate == $scope.search.EndVoyageDate) {
                         oneDay = $scope.search.StartVoyageDate;
                     }
-
                     if (dates == oneDay) {
                         return {
                             classes: 'one_date'
@@ -94,10 +92,11 @@ appComponents
                     $element.find('.to_date').focus();
                 });
 
+                
                 $element.find('.input-daterange').datepicker({
-                    format: "dd.mm.yyyy",
-                    StartVoyageDate: $scope.setStartDate,
-                    EndVoyageDate: new Date($scope.setStartDate.valueOf() + 86400000 * 365),
+                    format: "d.m.yyyy",
+                    startDate: $scope.setStartDate,
+                    endDate: new Date($scope.setStartDate.valueOf() + 86400000 * 365),
                     language: "ru",
                     autoclose: true,
                     todayHighlight: true,
@@ -190,6 +189,7 @@ appComponents
                 'selector': '='
             },
             controller: ['$scope', function ($scope) {
+                console.log(143);
                 $scope.onChoose = function (age) {
                     $scope.selector.value = age;
                 }
