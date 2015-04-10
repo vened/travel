@@ -6,6 +6,11 @@
   "css": "./spa/css",
   "base_css": "./spa/css/**/*.styl",
   "components": "./spa/components",
+  "directives": {
+    "js": "./spa/directives/**/*.js",
+    "slim": "./spa/directives/**/*.slim",
+    "css": "./spa/directives/**/css/*.styl"
+  },
   "components": {
     "js": "./spa/components/**/*.js",
     "slim": "./spa/components/**/*.slim",

@@ -35,6 +35,7 @@ gulp.task('build-js-libs', function () {
 gulp.task('build-js-tpl', function () {
     return gulp.src([
         conf.components.slim,
+        conf.directives.slim,
         conf.components + '/*.slim'
     ])
         .pipe(slim({
@@ -61,6 +62,7 @@ gulp.task('build-js-app', function () {
         conf.spa + '/services/*.js',
         conf.spa + '/directives/*.js',
         conf.components.js,
+        conf.directives.js,
     ])
         .pipe(ngAnnotate())
         .pipe(concat('app.js'))
