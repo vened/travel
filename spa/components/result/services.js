@@ -11,3 +11,20 @@ appServices.service('SearchResultServices', function ($q, $http, api) {
         }
     };
 });
+
+appServices.factory('DpHotels', function ($timeout) {
+    return {
+        get: function (index, count, success) {
+            console.log(index);
+            console.log(count);
+            return $timeout(function () {
+                var i, j, ref, ref1, result;
+                result = [];
+                for (i = j = ref = index, ref1 = index + count - 1; ref <= ref1 ? j <= ref1 : j >= ref1; i = ref <= ref1 ? ++j : --j) {
+                    result.push("item #" + i);
+                }
+                return success(result);
+            }, 100);
+        }
+    }
+});
