@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglifyjs');
+var uglify = require('gulp-uglify');
 var templateCache = require('gulp-angular-templatecache');
 var cleanhtml = require('gulp-cleanhtml');
 var ngAnnotate = require('gulp-ng-annotate');
