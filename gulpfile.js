@@ -23,6 +23,7 @@ gulp.task('deploy', function (callback) {
                 'build-css-base-production',
                 'build-css-components-production',
                 'build-js-app',
+                'build-js-tpl',
                 'build-js-libs'
             ],
             'build-md5-img',
